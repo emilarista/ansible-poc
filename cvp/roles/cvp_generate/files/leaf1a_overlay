@@ -1,0 +1,128 @@
+
+!! leaf1a Overlay Configuration
+
+!! VRFs 
+vrf instance RED
+!
+ip routing vrf RED
+!
+vrf instance BLUE
+!
+ip routing vrf BLUE
+!
+
+!! VLANs/SVIs
+
+vlan 10
+  name RED_WEB
+!
+interface vlan 10
+  vrf RED
+  ip address virtual 10.10.0.1/24
+!
+vlan 11
+  name RED_APP
+!
+interface vlan 11
+  vrf RED
+  ip address virtual 10.11.0.1/24
+!
+vlan 12
+  name RED_DB
+!
+interface vlan 12
+  vrf RED
+  ip address virtual 10.12.0.1/24
+!
+vlan 13
+  name RED_STORAGE
+!
+interface vlan 13
+  vrf RED
+  ip address virtual 10.13.0.1/24
+!
+vlan 100
+  name RED_VMOTION
+!
+
+vlan 20
+  name BLUE_WEB
+!
+interface vlan 20
+  vrf BLUE
+  ip address virtual 10.20.0.1/24
+!
+vlan 21
+  name BLUE_APP
+!
+interface vlan 21
+  vrf BLUE
+  ip address virtual 10.21.0.1/24
+!
+vlan 22
+  name BLUE_DB
+!
+interface vlan 22
+  vrf BLUE
+  ip address virtual 10.22.0.1/24
+!
+vlan 23
+  name BLUE_STORAGE
+!
+interface vlan 23
+  vrf BLUE
+  ip address virtual 10.23.0.1/24
+!
+vlan 200
+  name BLUE_VMOTION
+!
+
+!! VXLAN
+interface vxlan 1
+  vxlan vrf RED vni 50001
+  vxlan vlan add 10 vni 10010
+  vxlan vlan add 11 vni 10011
+  vxlan vlan add 12 vni 10012
+  vxlan vlan add 13 vni 10013
+  vxlan vlan add 100 vni 10100
+  vxlan vrf BLUE vni 50002
+  vxlan vlan add 20 vni 20020
+  vxlan vlan add 21 vni 20021
+  vxlan vlan add 22 vni 20022
+  vxlan vlan add 23 vni 20023
+  vxlan vlan add 200 vni 20200
+
+!! BGP/EVPN
+router bgp 65101
+  vrf RED
+    rd 1.1.1.3:10 
+    route-target import evpn 10:10
+    route-target export evpn 10:10
+    redistribute connected
+  !
+  vlan-aware bundle RED_VLANS
+    rd 1.1.1.3:10
+    route-target both 10:10
+    redistribute learned
+    vlan 10
+    vlan 11
+    vlan 12
+    vlan 13
+    vlan 100
+   !
+  vrf BLUE
+    rd 1.1.1.3:20 
+    route-target import evpn 20:20
+    route-target export evpn 20:20
+    redistribute connected
+  !
+  vlan-aware bundle BLUE_VLANS
+    rd 1.1.1.3:20
+    route-target both 20:20
+    redistribute learned
+    vlan 20
+    vlan 21
+    vlan 22
+    vlan 23
+    vlan 200
+   !

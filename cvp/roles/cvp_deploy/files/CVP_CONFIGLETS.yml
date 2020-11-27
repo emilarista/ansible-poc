@@ -1,0 +1,5 @@
+CVP_CONFIGLETS:
+  ANSIBLE_OVERLAY_leaf1a:  "{{ lookup ('file', 'roles/cvp_generate/files/leaf1a_overlay' )}}" 
+  ANSIBLE_OVERLAY_leaf1b:  "{{ lookup ('file', 'roles/cvp_generate/files/leaf1b_overlay' )}}" 
+  ANSIBLE_OVERLAY_leaf2a:  "{{ lookup ('file', 'roles/cvp_generate/files/leaf2a_overlay' )}}" 
+  ANSIBLE_OVERLAY_leaf2b:  "{{ lookup ('file', 'roles/cvp_generate/files/leaf2b_overlay' )}}" 

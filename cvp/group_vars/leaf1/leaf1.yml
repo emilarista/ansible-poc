@@ -1,0 +1,9 @@
+bgp_asn: 65101
+mlag_vtep: true
+tags: 
+  - red
+  - blue
+  - web
+  - app
+  - db
+  - storage

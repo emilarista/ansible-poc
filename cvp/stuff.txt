@@ -1,0 +1,23 @@
+
+ !
+   vlan-aware-bundle BLUE_VLANS
+      rd 1.1.1.3:2
+      route-target both 2:2
+      redistribute learned
+      vlan 20
+   !
+
+    vrf BLUE
+      rd 1.1.1.3:2
+      route-target import evpn 2:2
+      route-target export evpn 2:2
+      redistribute connected
+      redistribute attached-host
+   !
+   vrf RED
+      rd 1.1.1.3:1
+      route-target import evpn 1:1
+      route-target export evpn 1:1
+      redistribute connected
+      redistribute attached-host
+!
