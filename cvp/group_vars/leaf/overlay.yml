@@ -4,12 +4,14 @@ tenants:
     vlan_vni_base: 10000
     tenant_tag: red
     vlan_aware_bundle: true
+    redist_hostroutes: yes
     route_target: 10
     vlans:
       10: 
         name: RED_WEB
         l3: true
         ip: 10.10.0.1
+        host_route_export: yes
         mask: 24
         tags: 
           - web
@@ -17,6 +19,7 @@ tenants:
         name: RED_APP
         l3: true
         ip: 10.11.0.1
+        host_route_export: yes
         mask: 24
         tags:
           - app
@@ -24,6 +27,7 @@ tenants:
         name: RED_DB
         l3: true
         ip: 10.12.0.1
+        host_route_export: yes
         mask: 24
         tags:
           - db
@@ -31,6 +35,7 @@ tenants:
         name: RED_STORAGE
         l3: true
         ip: 10.13.0.1
+        host_route_export: yes
         mask: 24
         tags:
           - storage
@@ -44,12 +49,14 @@ tenants:
     vlan_vni_base: 20000
     tenant_tag: red
     vlan_aware_bundle: true
+    redist_hostroutes: yes
     route_target: 20
     vlans: 
       20:
         name: BLUE_WEB
         l3: true
         ip: 10.20.0.1
+        host_route_export: yes
         mask: 24
         tags:
           - blue
@@ -58,6 +65,7 @@ tenants:
         name: BLUE_APP
         l3: true
         ip: 10.21.0.1
+        host_route_export: no
         mask: 24
         tags:
           - blue
@@ -66,6 +74,7 @@ tenants:
         name: BLUE_DB
         l3: true
         ip: 10.22.0.1
+        host_route_export: no
         mask: 24
         tags:
           - blue

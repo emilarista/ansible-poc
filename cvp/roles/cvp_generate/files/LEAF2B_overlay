@@ -16,30 +16,34 @@ ip routing vrf BLUE
 vlan 10
   name RED_WEB
 !
-interface vlan 10
+interface Vlan10
   vrf RED
   ip address virtual 10.10.0.1/24
+  ip attached-host route export
 !
 vlan 11
   name RED_APP
 !
-interface vlan 11
+interface Vlan11
   vrf RED
   ip address virtual 10.11.0.1/24
+  ip attached-host route export
 !
 vlan 12
   name RED_DB
 !
-interface vlan 12
+interface Vlan12
   vrf RED
   ip address virtual 10.12.0.1/24
+  ip attached-host route export
 !
 vlan 13
   name RED_STORAGE
 !
-interface vlan 13
+interface Vlan13
   vrf RED
   ip address virtual 10.13.0.1/24
+  ip attached-host route export
 !
 vlan 100
   name RED_VMOTION
@@ -48,28 +52,29 @@ vlan 100
 vlan 20
   name BLUE_WEB
 !
-interface vlan 20
+interface Vlan20
   vrf BLUE
   ip address virtual 10.20.0.1/24
+  ip attached-host route export
 !
 vlan 21
   name BLUE_APP
 !
-interface vlan 21
+interface Vlan21
   vrf BLUE
   ip address virtual 10.21.0.1/24
 !
 vlan 22
   name BLUE_DB
 !
-interface vlan 22
+interface Vlan22
   vrf BLUE
   ip address virtual 10.22.0.1/24
 !
 vlan 23
   name BLUE_STORAGE
 !
-interface vlan 23
+interface Vlan23
   vrf BLUE
   ip address virtual 10.23.0.1/24
 !
@@ -78,7 +83,7 @@ vlan 200
 !
 
 !! VXLAN
-interface vxlan 1
+interface Vxlan1
   vxlan vrf RED vni 50001
   vxlan vlan add 10 vni 10010
   vxlan vlan add 11 vni 10011
@@ -99,30 +104,32 @@ router bgp 65102
     route-target import evpn 10:10
     route-target export evpn 10:10
     redistribute connected
+    redistribute attached-host
   !
-  vlan-aware bundle RED_VLANS
+  vlan-aware-bundle RED_VLANS
     rd 1.1.1.6:10
     route-target both 10:10
     redistribute learned
-    vlan 10
-    vlan 11
-    vlan 12
-    vlan 13
-    vlan 100
+    vlan add 10
+    vlan add 11
+    vlan add 12
+    vlan add 13
+    vlan add 100
    !
   vrf BLUE
     rd 1.1.1.6:20 
     route-target import evpn 20:20
     route-target export evpn 20:20
     redistribute connected
+    redistribute attached-host
   !
-  vlan-aware bundle BLUE_VLANS
+  vlan-aware-bundle BLUE_VLANS
     rd 1.1.1.6:20
     route-target both 20:20
     redistribute learned
-    vlan 20
-    vlan 21
-    vlan 22
-    vlan 23
-    vlan 200
+    vlan add 20
+    vlan add 21
+    vlan add 22
+    vlan add 23
+    vlan add 200
    !

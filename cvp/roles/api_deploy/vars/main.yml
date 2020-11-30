@@ -1,0 +1,10 @@
+---
+# vars file for api_deploy
+ansible_connection: "httpapi"
+ansible_network_os: "eos"
+ansible_user: "cvpadmin"
+ansible_ssh_pass: "volvov90t6"
+ansible_become: yes
+ansible_become_method: "enable"
+ansible_httpapi_use_ssl: true
+ansible_httpapi_validate_certs: false

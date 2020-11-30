@@ -1,5 +1,5 @@
 ---
-# tasks file for evpn-stage
+# tasks file for eos_generate
 - name: Generate configlet configuration
   connection: local
   template:
