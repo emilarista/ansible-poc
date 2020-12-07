@@ -47,7 +47,7 @@ Tasks:
 
 1. The role loops through all hosts in the "leaf" inventory host group, renders the overlay.j2 template for each device and puts the result in files/{{ inventory_hostname }}_overlay.
 
-### Playbook example
+### Playbook example:
 
     ---
     - name: Generate arista overlay configs
@@ -74,7 +74,7 @@ Tasks:
 
 If desired the last 2 tasks can be omitted and you can do a manual change control procedure instead.
 
-### Playbook example
+### Playbook example:
 
     ---
     - name: Generate arista overlay configs
@@ -95,7 +95,7 @@ If desired the last 2 tasks can be omitted and you can do a manual change contro
 
 This role can be used instead of cvp_deploy in order to deploy the changes directly to the devices via API. It uses the standard eos_config module, takes a backup of the configuration and places it in the backups folder, then pushes the changes line for line to the device.
 
-### Playbook example
+### Playbook example:
 
     ---
     - name: Generate arista overlay configs
