@@ -95,6 +95,8 @@ If desired the last 2 tasks can be omitted and you can do a manual change contro
 
 This role can be used instead of cvp_deploy in order to deploy the changes directly to the devices via API. It uses the standard eos_config module, takes a backup of the configuration and places it in the backups folder, then pushes the changes line for line to the device.
 
+Connection parameters for connecting to the Arista switches are placed in the role vars/main.yml file.
+
 ### Playbook example:
 
     ---
