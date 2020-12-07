@@ -1,14 +1,18 @@
 # Overlay Automation
 
+## Summary
 The data model and set of roles included in this repo are designed to automate deployment of generic EVPN overlay configuration in a brownfield deployment. For greenfield deployments, arista.avd collection is recommended instead, since it is much more comprehensive and full-featured.
 
+## Intended use
 The intended usage is for ansible to manage a configlet on CVP for each fabric device containing this configuration. This configlet can coexist with any other overlay or underlay configuration, as long as vni assignments, vlan numbers, etc doesn't overlap. It is meant to function as an easy, entry-level way of automating part (or all) of your overlay configuration with ansible.
 
 There is also a mechanism included to deploy the configuration directly to the switches via API. However, this is less desireable since only additive changes can be deployed if you're not managing your entire device config with ansible.
 
-An example inventory file is included, along with group and host vars files/folder structure.
+## Included files
+An example inventory file is included, along with group and host vars files/folder structure plus example playbooks, both for deploying via CVP and directly via API.
 
-The arista.cvp collection is required for this to work, so install it before you continue:
+## Requirements
+The arista.cvp collection along with its dependencies is required for this to work, so install it before you continue:
 
     ansible-galaxy collection install arista.cvp
 
@@ -40,9 +44,10 @@ Used to generate the cli configuration for the configlets based on the vars incl
 The main template for this role is the templates/overlay.j2 template, which serves as a master index, and includes subtemplates located in templates/overlay/ directory.
 
 Tasks:
+
 1. The role loops through all hosts in the "leaf" inventory host group, renders the overlay.j2 template for each device and puts the result in files/{{ inventory_hostname }}_overlay.
 
-Playbook example: 
+### Playbook example
 
     ---
     - name: Generate arista overlay configs
@@ -69,7 +74,41 @@ Tasks:
 
 If desired the last 2 tasks can be omitted and you can do a manual change control procedure instead.
 
+### Playbook example
+
+    ---
+    - name: Generate arista overlay configs
+    hosts: leaf
+    gather_facts: false
+    
+    roles:
+    - eos_generate
+
+    - name: Push configlets to CVP
+    hosts: CVP
+    gather_facts: false
+
+    roles:
+    - cvp_deploy
+
 ## api_deploy
 
-This role can be used instead of cvp_deploy in order to deploy the changes directly to the devices via API. It uses the standard eos_config module, takes a backup of the configuration and places it in the backups folder, then pushes the changes line for line to the device. 
+This role can be used instead of cvp_deploy in order to deploy the changes directly to the devices via API. It uses the standard eos_config module, takes a backup of the configuration and places it in the backups folder, then pushes the changes line for line to the device.
+
+### Playbook example
+
+    ---
+    - name: Generate arista overlay configs
+    hosts: leaf
+    gather_facts: false
+    
+    roles:
+    - eos_generate
+
+    - name: Generate arista overlay configs
+    hosts: leaf
+    gather_facts: true
+
+    roles:
+    - api_deploy
 

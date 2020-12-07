@@ -6,7 +6,7 @@
   roles:
   - eos_generate
 
-- name: Generate arista overlay configs
+- name: Push configlets to CVP
   hosts: CVP
   gather_facts: false
 
