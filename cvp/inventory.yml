@@ -7,10 +7,11 @@ all:
           ansible_httpapi_host: 10.20.20.20
           ansible_host: 10.20.20.20
           ansible_user: cvpadmin
-          ansible_password: volvov90t6
+          ansible_password: somepassword
           ansible_connection: httpapi
           ansible_httpapi_use_ssl: True
           ansible_httpapi_validate_certs: False
+          # ansible_httpapi_validate_certs: True 
           ansible_network_os: eos
           ansible_httpapi_port: 443
           # Configuration to get Virtual Env information

@@ -4,7 +4,7 @@
   gather_facts: false
   
   roles:
-  - cvp_generate
+  - eos_generate
 
 - name: Generate arista overlay configs
   hosts: leaf

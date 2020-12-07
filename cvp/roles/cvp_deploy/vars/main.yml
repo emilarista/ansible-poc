@@ -1,7 +1,3 @@
 ---
 # vars file for cvp_deploy
-CVP_CONFIGLETS:
-  ANSIBLE_OVERLAY_LEAF1A:  "{{ lookup ('file', 'roles/cvp_generate/files/LEAF1A_overlay' )}}" 
-  ANSIBLE_OVERLAY_LEAF1B:  "{{ lookup ('file', 'roles/cvp_generate/files/LEAF1B_overlay' )}}" 
-  ANSIBLE_OVERLAY_LEAF2A:  "{{ lookup ('file', 'roles/cvp_generate/files/LEAF2A_overlay' )}}" 
-  ANSIBLE_OVERLAY_LEAF2B:  "{{ lookup ('file', 'roles/cvp_generate/files/LEAF2B_overlay' )}}" 
+

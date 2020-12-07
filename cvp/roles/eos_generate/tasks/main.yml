@@ -4,4 +4,4 @@
   connection: local
   template:
     src: overlay_config.j2
-    dest: roles/cvp_generate/files/{{ inventory_hostname }}_overlay
+    dest: roles/eos_generate/files/{{ inventory_hostname }}_overlay
