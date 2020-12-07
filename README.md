@@ -38,7 +38,6 @@ The roles use information provided in group_vars and host_vars. This a tree view
     ...
 
 ## eos_generate
-
 Used to generate the cli configuration for the configlets based on the vars included in the group_vars/leaf/overlay.yml file, host vars files and the group_vars/leaf1/leaf1.yml and ..../leaf2/leaf2.yml files.
 
 The main template for this role is the templates/overlay.j2 template, which serves as a master index, and includes subtemplates located in templates/overlay/ directory.
@@ -58,7 +57,6 @@ Tasks:
     - eos_generate
 
 ## cvp_deploy
-
 This role is designed to take the raw config generated with eos_generate and put it into configlets, push the configlets to a CVP instance, attach the configlets to the proper devices if needed and execute the resulting tasks, pushing the configuration to the fabric devices.
 
 Tasks:
@@ -92,7 +90,6 @@ If desired the last 2 tasks can be omitted and you can do a manual change contro
     - cvp_deploy
 
 ## api_deploy
-
 This role can be used instead of cvp_deploy in order to deploy the changes directly to the devices via API. It uses the standard eos_config module, takes a backup of the configuration and places it in the backups folder, then pushes the changes line for line to the device.
 
 Connection parameters for connecting to the Arista switches are placed in the role vars/main.yml file.
